@@ -25,7 +25,9 @@ macro_rules! collect_functions {
     }};
 }
 
-pub fn generate_manpages(_crates: &Vec<String>) -> Result<(), std::io::Error> {
+/// # Errors
+/// Returns an error if the manpage generation fails.
+pub fn generate_manpages(_crates: &[String]) -> Result<(), std::io::Error> {
     let crates = collect_functions!(uu_arch, uu_cat);
     println!("{:?}", crates);
     for (one_crate, args_fn) in crates {
