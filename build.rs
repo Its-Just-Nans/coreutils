@@ -4,8 +4,10 @@
 // file that was distributed with this source code.
 
 // spell-checker:ignore (vars) krate
+use clap::Command;
 use clap_complete::{generate_to, shells};
 use clap_mangen::Man;
+use std::collections::HashMap;
 use std::env;
 use std::fs::File;
 use std::io::Write;
@@ -13,12 +15,23 @@ use std::path::Path;
 
 include!("./src/args.rs");
 
+macro_rules! collect_functions {
+    ($($module:ident),*) => {{
+        let mut map: HashMap<&'static str, fn() -> Command> = HashMap::new();
+        $(
+            map.insert(stringify!($module), $module::uu_app);
+        )*
+        map
+    }};
+}
+
 pub fn generate_manpages(_crates: &Vec<String>) -> Result<(), std::io::Error> {
-    let crates = vec!["arch"];
-    for one_crate in crates {
+    let crates = collect_functions!(uu_arch, uu_cat);
+    println!("{:?}", crates);
+    for (one_crate, args_fn) in crates {
         let app_name = one_crate;
         let outdir = "completion";
-        let mut cmd = uu_arch::uu_app();
+        let mut cmd = args_fn();
 
         generate_to(shells::Bash, &mut cmd, app_name, outdir)?;
         generate_to(shells::Zsh, &mut cmd, app_name, outdir)?;
