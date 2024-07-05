@@ -31,7 +31,7 @@ pub fn generate_manpages(_crates: &Vec<String>) -> Result<(), std::io::Error> {
     for (one_crate, args_fn) in crates {
         let app_name = one_crate;
         let outdir = "completion";
-        let mut cmd = args_fn();
+        let mut cmd = args_fn().name(app_name);
 
         generate_to(shells::Bash, &mut cmd, app_name, outdir)?;
         generate_to(shells::Zsh, &mut cmd, app_name, outdir)?;
