@@ -971,7 +971,8 @@ impl Config {
         let mut quoting_style = extract_quoting_style(options, show_control);
         let indicator_style = extract_indicator_style(options);
         // Only parse the value to "--time-style" if it will become relevant.
-        let time_style = if format == Format::Long {
+        let dired = options.get_flag(options::DIRED);
+        let time_style = if format == Format::Long || dired {
             parse_time_style(options)?
         } else {
             TimeStyle::Iso
@@ -1092,7 +1093,6 @@ impl Config {
             None
         };
 
-        let dired = options.get_flag(options::DIRED);
         if dired || is_dired_arg_present() {
             // --dired implies --format=long
             // if we have --dired --hyperlink, we don't show dired but we still want to see the
@@ -2038,7 +2038,7 @@ impl PathData {
 
 fn show_dir_name(path_data: &PathData, out: &mut BufWriter<Stdout>, config: &Config) {
     if config.hyperlink && !config.dired {
-        let name = escape_name(&path_data.display_name, &config.quoting_style);
+        let name = escape_name(path_data.p_buf.as_os_str(), &config.quoting_style);
         let hyperlink = create_hyperlink(&name, path_data);
         write!(out, "{}:", hyperlink).unwrap();
     } else {
@@ -2650,7 +2650,7 @@ fn display_grid(
             writeln!(out)?;
         }
     } else {
-        let names = if quoted {
+        let names: Vec<String> = if quoted {
             // In case some names are quoted, GNU adds a space before each
             // entry that does not start with a quote to make it prettier
             // on multiline.
@@ -2675,12 +2675,21 @@ fn display_grid(
         } else {
             names.collect()
         };
+
+        // Determine whether to use tabs for separation based on whether any entry ends with '/'.
+        // If any entry ends with '/', it indicates that the -F flag is likely used to classify directories.
+        let use_tabs = names.iter().any(|name| name.ends_with('/'));
+
+        let filling = if use_tabs {
+            Filling::Text("\t".to_string())
+        } else {
+            Filling::Spaces(2)
+        };
+
         let grid = Grid::new(
             names,
             GridOptions {
-                // TODO: To match gnu/tests/ls/stat-dtype.sh
-                // we might want to have Filling::Text("\t".to_string());
-                filling: Filling::Spaces(2),
+                filling,
                 direction,
                 width: width as usize,
             },
@@ -3369,7 +3378,6 @@ fn display_inode(metadata: &Metadata) -> String {
 
 // This returns the SELinux security context as UTF8 `String`.
 // In the long term this should be changed to `OsStr`, see discussions at #2621/#2656
-#[allow(unused_variables)]
 fn get_security_context(config: &Config, p_buf: &Path, must_dereference: bool) -> String {
     let substitute_string = "?".to_string();
     // If we must dereference, ensure that the symlink is actually valid even if the system
@@ -3383,7 +3391,7 @@ fn get_security_context(config: &Config, p_buf: &Path, must_dereference: bool) -
                 show!(LsError::IOErrorContext(err, p_buf.to_path_buf(), false));
                 return substitute_string;
             }
-            Ok(md) => (),
+            Ok(_md) => (),
         }
     }
     if config.selinux_supported {

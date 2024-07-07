@@ -15,6 +15,7 @@ use crate::common::util::TestScenario;
 #[cfg(all(unix, feature = "chmod"))]
 use nix::unistd::{close, dup};
 use regex::Regex;
+#[cfg(not(target_os = "openbsd"))]
 use std::collections::HashMap;
 #[cfg(target_os = "linux")]
 use std::ffi::OsStr;
@@ -158,7 +159,11 @@ fn test_ls_ordering() {
         .stdout_matches(&Regex::new("some-dir1:\\ntotal 0").unwrap());
 }
 
-#[cfg(all(unix, feature = "df", not(target_os = "freebsd")))]
+#[cfg(all(
+    unix,
+    feature = "df",
+    not(any(target_os = "freebsd", target_os = "openbsd"))
+))]
 fn get_filesystem_type(scene: &TestScenario, path: &Path) -> String {
     let mut cmd = scene.ccmd("df");
     cmd.args(&["-PT"]).arg(path);
@@ -174,7 +179,8 @@ fn get_filesystem_type(scene: &TestScenario, path: &Path) -> String {
 }
 
 #[cfg(all(feature = "truncate", feature = "dd"))]
-#[test] // FIXME: fix this test for FreeBSD
+#[test] // FIXME: fix this test for FreeBSD and OpenBSD
+#[cfg(not(target_os = "openbsd"))]
 fn test_ls_allocation_size() {
     let scene = TestScenario::new(util_name!());
     let at = &scene.fixtures;
@@ -1421,6 +1427,7 @@ fn test_ls_long_dangling_symlink_color() {
 }
 
 #[test]
+#[cfg(not(target_os = "openbsd"))]
 fn test_ls_long_total_size() {
     let scene = TestScenario::new(util_name!());
     let at = &scene.fixtures;
@@ -2440,7 +2447,7 @@ fn test_ls_indicator_style() {
     }
 }
 
-#[cfg(not(any(target_vendor = "apple", target_os = "windows")))] // Truncate not available on mac or win
+#[cfg(not(any(target_vendor = "apple", target_os = "windows", target_os = "openbsd")))] // Truncate not available on mac or win
 #[test]
 fn test_ls_human_si() {
     let scene = TestScenario::new(util_name!());
@@ -2990,6 +2997,35 @@ fn test_ls_align_unquoted() {
         //                              ^      ^          ^
         //                              space  no-space   space
     }
+}
+
+#[test]
+fn test_ls_align_unquoted_multiline() {
+    let scene = TestScenario::new(util_name!());
+    let at = &scene.fixtures;
+
+    at.touch("one");
+    at.touch("two");
+    at.touch("three_long");
+    at.touch("four_long");
+    at.touch("five");
+    at.touch("s ix");
+    at.touch("s even");
+    at.touch("eight_long_long");
+    at.touch("nine");
+    at.touch("ten");
+
+    // In TTY
+    #[cfg(unix)]
+    scene
+        .ucmd()
+        .arg("--color")
+        .terminal_simulation(true)
+        .succeeds()
+        .stdout_only(concat!(
+            " eight_long_long   four_long   one      's ix'   three_long\r\n",
+            " five              nine       's even'   ten     two\r\n"
+        ));
 }
 
 #[test]
@@ -4030,6 +4066,42 @@ fn test_ls_dired_recursive() {
 }
 
 #[test]
+fn test_ls_dired_outputs_parent_offset() {
+    let scene = TestScenario::new(util_name!());
+    let at = &scene.fixtures;
+    at.mkdir("dir");
+    at.mkdir("dir/a");
+    scene
+        .ucmd()
+        .arg("--dired")
+        .arg("dir")
+        .arg("-R")
+        .succeeds()
+        .stdout_contains("//DIRED//");
+}
+
+#[test]
+fn test_ls_dired_outputs_same_date_time_format() {
+    let scene = TestScenario::new(util_name!());
+    let at = &scene.fixtures;
+    at.mkdir("dir");
+    at.mkdir("dir/a");
+    let binding = scene.ucmd().arg("-l").arg("dir").run();
+    let long_output_str = binding.stdout_str();
+    let split_lines: Vec<&str> = long_output_str.split('\n').collect();
+    // the second line should contain the long output which includes date
+    let list_line = split_lines.get(1).unwrap();
+    // should be same as the dired output
+    scene
+        .ucmd()
+        .arg("--dired")
+        .arg("dir")
+        .arg("-R")
+        .succeeds()
+        .stdout_contains(list_line);
+}
+
+#[test]
 fn test_ls_dired_recursive_multiple() {
     let scene = TestScenario::new(util_name!());
     let at = &scene.fixtures;
@@ -4230,7 +4302,6 @@ fn test_ls_subdired_complex() {
     assert_eq!(dirnames, vec!["dir1", "dir1\\c2", "dir1\\d"]);
 }
 
-#[ignore = "issue #5396"]
 #[test]
 fn test_ls_cf_output_should_be_delimited_by_tab() {
     let (at, mut ucmd) = at_and_ucmd!();
@@ -4246,6 +4317,7 @@ fn test_ls_cf_output_should_be_delimited_by_tab() {
 
 #[cfg(all(unix, feature = "dd"))]
 #[test]
+#[cfg(not(target_os = "openbsd"))]
 fn test_posixly_correct_and_block_size_env_vars() {
     let scene = TestScenario::new(util_name!());
 
@@ -4299,6 +4371,7 @@ fn test_posixly_correct_and_block_size_env_vars() {
 
 #[cfg(all(unix, feature = "dd"))]
 #[test]
+#[cfg(not(target_os = "openbsd"))]
 fn test_posixly_correct_and_block_size_env_vars_with_k() {
     let scene = TestScenario::new(util_name!());
 
@@ -4359,6 +4432,7 @@ fn test_ls_invalid_block_size() {
 
 #[cfg(all(unix, feature = "dd"))]
 #[test]
+#[cfg(not(target_os = "openbsd"))]
 fn test_ls_invalid_block_size_in_env_var() {
     let scene = TestScenario::new(util_name!());
 
@@ -4397,6 +4471,7 @@ fn test_ls_invalid_block_size_in_env_var() {
 
 #[cfg(all(unix, feature = "dd"))]
 #[test]
+#[cfg(not(target_os = "openbsd"))]
 fn test_ls_block_size_override() {
     let scene = TestScenario::new(util_name!());
 
@@ -4563,6 +4638,49 @@ fn test_ls_hyperlink_dirs() {
         .nth(2)
         .unwrap()
         .contains(&format!("{path}{separator}{dir_b}\x07{dir_b}\x1b]8;;\x07:")));
+}
+
+#[test]
+fn test_ls_hyperlink_recursive_dirs() {
+    let scene = TestScenario::new(util_name!());
+    let at = &scene.fixtures;
+    let path = at.root_dir_resolved();
+    let separator = std::path::MAIN_SEPARATOR_STR;
+
+    let dir_a = "a";
+    let dir_b = "b";
+    at.mkdir(dir_a);
+    at.mkdir(format!("{dir_a}/{dir_b}"));
+
+    let result = scene
+        .ucmd()
+        .arg("--hyperlink")
+        .arg("--recursive")
+        .arg(dir_a)
+        .succeeds();
+
+    macro_rules! assert_hyperlink {
+        ($line:expr, $expected:expr) => {
+            assert!(matches!($line, Some(l) if l.starts_with("\x1b]8;;file://") && l.ends_with($expected)));
+        };
+    }
+
+    let mut lines = result.stdout_str().lines();
+    assert_hyperlink!(
+        lines.next(),
+        &format!("{path}{separator}{dir_a}\x07{dir_a}\x1b]8;;\x07:")
+    );
+    assert_hyperlink!(
+        lines.next(),
+        &format!("{path}{separator}{dir_a}{separator}{dir_b}\x07{dir_b}\x1b]8;;\x07")
+    );
+    assert!(matches!(lines.next(), Some(l) if l.is_empty()));
+    assert_hyperlink!(
+        lines.next(),
+        &format!(
+            "{path}{separator}{dir_a}{separator}{dir_b}\x07{dir_a}{separator}{dir_b}\x1b]8;;\x07:"
+        )
+    );
 }
 
 #[test]
