@@ -230,7 +230,7 @@ impl Output {
 }
 
 #[derive(Clone)]
-pub(crate) struct GlobalSettings {
+pub struct GlobalSettings {
     pub(crate) mode: SortMode,
     pub(crate) debug: bool,
     pub(crate) ignore_leading_blanks: bool,
