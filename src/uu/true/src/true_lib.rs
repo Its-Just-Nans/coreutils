@@ -8,7 +8,6 @@ use clap::{Arg, ArgAction, Command};
 use std::{ffi::OsString, io::Write};
 use uucore::error::{set_exit_code, UResult};
 
-
 #[uucore::main]
 pub fn uumain(args: impl uucore::Args) -> UResult<()> {
     let mut command = crate::uu_app();

@@ -3,7 +3,6 @@
 // For the full copyright and license information, please view the LICENSE
 // file that was distributed with this source code.
 
-
 pub mod shred;
 pub mod uu_args;
 pub use uu_args::options;
