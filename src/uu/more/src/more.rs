@@ -467,7 +467,7 @@ impl<'a> Pager<'a> {
                 (lower_mark as f64 / self.line_count as f64 * 100.0).round() as u16
             )
         };
-        use crate::BELL;
+        use crate::uu_args::BELL;
         let status = format!("--More--({status_inner})");
         let banner = match (self.silent, wrong_key) {
             (true, Some(key)) => format!(
