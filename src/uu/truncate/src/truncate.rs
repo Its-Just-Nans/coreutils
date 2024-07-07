@@ -342,8 +342,8 @@ fn parse_mode_and_size(size_string: &str) -> Result<TruncateMode, ParseSizeError
 
 #[cfg(test)]
 mod tests {
-    use crate::parse_mode_and_size;
-    use crate::TruncateMode;
+    use crate::truncate::parse_mode_and_size;
+    use crate::truncate::TruncateMode;
 
     #[test]
     fn test_parse_mode_and_size() {

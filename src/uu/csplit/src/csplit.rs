@@ -241,8 +241,8 @@ impl<'a> SplitWriter<'a> {
     }
 
     /// Perform some operations after completing a split, i.e., either remove it
-    /// if the [`options::ELIDE_EMPTY_FILES`] option is enabled, or print how much bytes were written
-    /// to it if [`options::QUIET`] is disabled.
+    /// if the [`crate::options::ELIDE_EMPTY_FILES`] option is enabled, or print how much bytes were written
+    /// to it if [`crate::options::QUIET`] is disabled.
     ///
     /// # Errors
     ///
