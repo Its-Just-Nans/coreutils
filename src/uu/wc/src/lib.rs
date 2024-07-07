@@ -8,7 +8,7 @@ pub mod wc;
 pub use uu_args::options;
 pub use uu_args::uu_app;
 pub use uu_args::ARG_FILES;
-pub use uu_args::STDIN_REPR;
+pub static STDIN_REPR: &str = "-";
 
 pub use wc::uumain;
 

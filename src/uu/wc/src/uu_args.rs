@@ -19,7 +19,6 @@ pub mod options {
     pub static WORDS: &str = "words";
 }
 pub static ARG_FILES: &str = "files";
-pub static STDIN_REPR: &str = "-";
 
 pub fn uu_app() -> Command {
     Command::new(uucore::util_name())
