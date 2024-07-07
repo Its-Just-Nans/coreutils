@@ -28,7 +28,7 @@ macro_rules! collect_functions {
 /// # Errors
 /// Returns an error if the manpage generation fails.
 pub fn generate_manpages(_crates: &[String]) -> Result<(), std::io::Error> {
-    let crates = collect_functions!(uu_arch, uu_cat);
+    let crates = collect_functions!(uu_arch, uu_cat, uu_wc, uu_who, uu_whoami, uu_yes);
     println!("{:?}", crates);
     for (one_crate, args_fn) in crates {
         let app_name = one_crate;
