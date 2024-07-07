@@ -6,6 +6,7 @@
 use std::io::{stdout, Read, Write};
 
 use crate::display::Quotable;
+#[cfg(feature = "encoding")]
 use crate::encoding::{wrap_print, Data, EncodeError, Format};
 use crate::error::{FromIo, UResult, USimpleError, UUsageError};
 use crate::format_usage;
@@ -170,6 +171,7 @@ pub fn handle_input<R: Read>(
             Err(_) => Err(USimpleError::new(1, "error: invalid input")),
         }
     } else {
+        #[cfg(feature = "encoding")]
         match data.encode() {
             Ok(s) => {
                 wrap_print(&data, &s);
@@ -181,5 +183,8 @@ pub fn handle_input<R: Read>(
                 "error: invalid input (length must be multiple of 4 characters)",
             )),
         }
+
+        #[cfg(not(feature = "encoding"))]
+        Err(USimpleError::new(1, "error: encoding is not supported"))
     }
 }

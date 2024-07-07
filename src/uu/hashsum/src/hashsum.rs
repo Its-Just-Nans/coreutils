@@ -5,16 +5,11 @@
 
 // spell-checker:ignore (ToDO) algo, algoname, regexes, nread, nonames
 
-use clap::builder::ValueParser;
-use clap::crate_version;
-use clap::value_parser;
-use clap::ArgAction;
-use clap::{Arg, ArgMatches, Command};
+use clap::ArgMatches;
 use std::ffi::{OsStr, OsString};
 use std::fs::File;
 use std::io::{stdin, BufReader, Read};
 use std::iter;
-use std::num::ParseIntError;
 use std::path::Path;
 use uucore::checksum::calculate_blake2b_length;
 use uucore::checksum::create_sha3;

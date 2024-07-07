@@ -491,7 +491,7 @@ pub fn mktemp(options: &Options) -> UResult<PathBuf> {
 
 #[cfg(test)]
 mod tests {
-    use crate::find_last_contiguous_block_of_xs as findxs;
+    use crate::mktemp::find_last_contiguous_block_of_xs as findxs;
 
     #[test]
     fn test_find_last_contiguous_block_of_xs() {

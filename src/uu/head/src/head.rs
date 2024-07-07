@@ -463,7 +463,7 @@ mod tests {
     fn options(args: &str) -> Result<HeadOptions, String> {
         let combined = "head ".to_owned() + args;
         let args = combined.split_whitespace().map(OsString::from);
-        let matches = uu_app()
+        let matches = crate::uu_app()
             .get_matches_from(arg_iterate(args).map_err(|_| String::from("Arg iterate failed"))?);
         HeadOptions::get_from(&matches)
     }
