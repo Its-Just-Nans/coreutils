@@ -3,7 +3,7 @@
 // For the full copyright and license information, please view the LICENSE
 // file that was distributed with this source code.
 
-// spell-checker:ignore (vars) krate
+// spell-checker:ignore (vars) krate manpages mangen
 use clap::Command;
 use clap_complete::{generate_to, shells};
 use clap_mangen::Man;
@@ -30,21 +30,23 @@ macro_rules! collect_functions {
 pub fn generate_manpages(_crates: &[String]) -> Result<(), std::io::Error> {
     let crates = collect_functions!(uu_arch, uu_cat, uu_wc, uu_who, uu_whoami, uu_yes);
     println!("{:?}", crates);
-    for (one_crate, args_fn) in crates {
-        let app_name = one_crate;
-        let outdir = "completion";
+    let out_dir_completion = "completion";
+    std::fs::create_dir_all(out_dir_completion)?;
+
+    let out_dir_manpages = "man-page";
+    std::fs::create_dir_all(out_dir_manpages)?;
+
+    for (app_name, args_fn) in crates {
         let mut cmd = args_fn().name(app_name);
 
-        generate_to(shells::Bash, &mut cmd, app_name, outdir)?;
-        generate_to(shells::Zsh, &mut cmd, app_name, outdir)?;
-        generate_to(shells::Fish, &mut cmd, app_name, outdir)?;
-        generate_to(shells::PowerShell, &mut cmd, app_name, outdir)?;
-        generate_to(shells::Elvish, &mut cmd, app_name, outdir)?;
+        generate_to(shells::Bash, &mut cmd, app_name, out_dir_completion)?;
+        generate_to(shells::Zsh, &mut cmd, app_name, out_dir_completion)?;
+        generate_to(shells::Fish, &mut cmd, app_name, out_dir_completion)?;
+        generate_to(shells::PowerShell, &mut cmd, app_name, out_dir_completion)?;
+        generate_to(shells::Elvish, &mut cmd, app_name, out_dir_completion)?;
 
-        let file = Path::new("man-page").join(app_name.to_owned() + ".1");
-        std::fs::create_dir_all("man-page")?;
+        let file = Path::new(out_dir_manpages).join(app_name.to_owned() + ".1");
         let mut file = File::create(file)?;
-
         Man::new(cmd).render(&mut file)?;
     }
     Ok(())
