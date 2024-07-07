@@ -6,6 +6,13 @@ mod uu_cat {
     include!("./uu/cat/src/uu_args.rs");
 }
 
+mod uu_cut {
+    include!("./uu/cat/src/uu_args.rs");
+}
+mod uu_cp {
+    include!("./uu/cp/src/uu_args.rs");
+}
+
 mod uu_dd {
     include!("./uu/dd/src/uu_args.rs");
 }

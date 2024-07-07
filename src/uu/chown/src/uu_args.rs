@@ -12,6 +12,7 @@ use uucore::{format_usage, help_about, help_usage};
 static ABOUT: &str = help_about!("chown.md");
 const USAGE: &str = help_usage!("chown.md");
 
+#[allow(clippy::too_many_lines)]
 pub fn uu_app() -> Command {
     Command::new(uucore::util_name())
         .version(crate_version!())

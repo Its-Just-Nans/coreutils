@@ -1419,7 +1419,9 @@ pub fn uumain(args: impl uucore::Args) -> UResult<()> {
 
 #[cfg(test)]
 mod tests {
-    use crate::calc_bsize;
+    use crate::dd::calc_bsize;
+    use crate::dd::Output;
+    use crate::dd::Parser;
     use std::path::Path;
 
     #[test]
