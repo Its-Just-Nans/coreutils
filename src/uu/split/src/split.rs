@@ -279,7 +279,7 @@ impl fmt::Display for SettingsError {
             #[cfg(windows)]
             Self::NotSupported => write!(
                 f,
-                "{OPT_FILTER} is currently not supported in this platform"
+                "{crate::options::OPT_FILTER} is currently not supported in this platform"
             ),
         }
     }
