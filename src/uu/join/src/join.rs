@@ -18,7 +18,7 @@ use std::os::unix::ffi::OsStrExt;
 use uucore::display::Quotable;
 use uucore::error::{set_exit_code, FromIo, UError, UResult, USimpleError};
 use uucore::line_ending::LineEnding;
-use uucore::{crash_if_err, format_usage, help_about, help_usage};
+use uucore::{crash_if_err};
 
 #[derive(Debug)]
 enum JoinError {

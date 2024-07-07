@@ -5,11 +5,10 @@
 
 // spell-checker:ignore (ToDO) srcpath targetpath EEXIST
 
-use clap::{crate_version, Arg, ArgAction, Command};
 use uucore::display::Quotable;
 use uucore::error::{FromIo, UError, UResult};
 use uucore::fs::{make_path_relative_to, paths_refer_to_same_file};
-use uucore::{format_usage, help_about, help_section, help_usage, prompt_yes, show_error};
+use uucore::{prompt_yes, show_error};
 
 use std::borrow::Cow;
 use std::collections::HashSet;

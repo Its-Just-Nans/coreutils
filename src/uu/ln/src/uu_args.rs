@@ -30,6 +30,7 @@ pub fn uu_app() -> Command {
     Command::new(uucore::util_name())
         .version(crate_version!())
         .about(ABOUT)
+        .after_help(AFTER_HELP)
         .override_usage(format_usage(USAGE))
         .infer_long_args(true)
         .arg(backup_control::arguments::backup())

@@ -10,10 +10,8 @@ use std::ffi::{CString, OsString};
 use std::io::{Error, Write};
 use std::ptr;
 
-use clap::{crate_version, Arg, ArgAction, Command};
 use uucore::{
-    error::{set_exit_code, UClapError, UResult, USimpleError, UUsageError},
-    format_usage, help_about, help_usage, show_error,
+    error::{set_exit_code, UClapError, UResult, USimpleError, UUsageError}, show_error,
 };
 
 fn is_prefix_of(maybe_prefix: &str, target: &str, min_match: usize) -> bool {

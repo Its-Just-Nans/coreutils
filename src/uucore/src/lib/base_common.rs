@@ -145,6 +145,7 @@ pub fn get_input<'a>(config: &Config, stdin_ref: &'a Stdin) -> UResult<Box<dyn R
     }
 }
 
+#[cfg(feature = "encoding")]
 pub fn handle_input<R: Read>(
     input: &mut R,
     format: Format,
@@ -171,7 +172,6 @@ pub fn handle_input<R: Read>(
             Err(_) => Err(USimpleError::new(1, "error: invalid input")),
         }
     } else {
-        #[cfg(feature = "encoding")]
         match data.encode() {
             Ok(s) => {
                 wrap_print(&data, &s);
@@ -183,8 +183,5 @@ pub fn handle_input<R: Read>(
                 "error: invalid input (length must be multiple of 4 characters)",
             )),
         }
-
-        #[cfg(not(feature = "encoding"))]
-        Err(USimpleError::new(1, "error: encoding is not supported"))
     }
 }

@@ -5,12 +5,11 @@
 
 // spell-checker:ignore (ToDO) parsemode makedev sysmacros perror IFBLK IFCHR IFIFO
 
-use clap::{crate_version, value_parser, Arg, ArgMatches, Command};
+use clap::{ArgMatches};
 use libc::{dev_t, mode_t};
 use libc::{S_IFBLK, S_IFCHR, S_IFIFO, S_IRGRP, S_IROTH, S_IRUSR, S_IWGRP, S_IWOTH, S_IWUSR};
 use std::ffi::CString;
 
-use uucore::display::Quotable;
 use uucore::error::{set_exit_code, UResult, USimpleError, UUsageError};
 
 use crate::uu_args::FileType;

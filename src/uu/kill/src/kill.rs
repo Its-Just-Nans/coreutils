@@ -5,14 +5,13 @@
 
 // spell-checker:ignore (ToDO) signalname pids killpg
 
-use clap::{crate_version, Arg, ArgAction, Command};
 use nix::sys::signal::{self, Signal};
 use nix::unistd::Pid;
 use std::io::Error;
 use uucore::display::Quotable;
 use uucore::error::{FromIo, UResult, USimpleError};
 use uucore::signals::{signal_by_name_or_value, signal_name_by_value, ALL_SIGNALS};
-use uucore::{format_usage, help_about, help_usage, show};
+use uucore::{show};
 
 #[derive(Clone, Copy)]
 pub enum Mode {

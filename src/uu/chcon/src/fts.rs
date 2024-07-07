@@ -13,6 +13,7 @@ use crate::chcon::os_str_to_c_string;
 use crate::errors::{Error, Result};
 
 #[derive(Debug)]
+#[allow(clippy::upper_case_acronyms)]
 pub(crate) struct FTS {
     fts: ptr::NonNull<fts_sys::FTS>,
 

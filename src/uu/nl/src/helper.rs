@@ -4,7 +4,6 @@
 // file that was distributed with this source code.
 // spell-checker:ignore (ToDO) conv
 
-use crate::options;
 
 // parse_options loads the options into the settings, returning an array of
 // error messages.

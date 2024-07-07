@@ -4,12 +4,10 @@
 // file that was distributed with this source code.
 // spell-checker:ignore (vars) RFILE
 
-use clap::builder::ValueParser;
 use clap::Command;
 use uucore::error::{UResult, UUsageError};
 
 use selinux::{OpaqueSecurityContext, SecurityClass, SecurityContext};
-use uucore::{format_usage, help_about, help_section, help_usage};
 
 use std::borrow::Cow;
 use std::ffi::{CStr, CString, OsStr, OsString};

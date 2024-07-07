@@ -5,11 +5,9 @@
 
 // spell-checker:ignore (ToDO) NPROCESSORS nprocs numstr threadstr sysconf
 
-use clap::{crate_version, Arg, ArgAction, Command};
 use std::{env, thread};
 use uucore::display::Quotable;
 use uucore::error::{UResult, USimpleError};
-use uucore::{format_usage, help_about, help_usage};
 
 #[cfg(any(target_os = "linux", target_os = "android"))]
 pub const _SC_NPROCESSORS_CONF: libc::c_int = 83;

@@ -5,7 +5,6 @@
 
 // spell-checker:ignore (ToDO) Chmoder cmode fmode fperm fref ugoa RFILE RFILE's
 
-use clap::{crate_version, Arg, ArgAction, Command};
 use std::ffi::OsString;
 use std::fs;
 use std::os::unix::fs::{MetadataExt, PermissionsExt};
@@ -16,7 +15,7 @@ use uucore::fs::display_permissions_unix;
 use uucore::libc::mode_t;
 #[cfg(not(windows))]
 use uucore::mode;
-use uucore::{format_usage, help_about, help_section, help_usage, show, show_error};
+use uucore::{show, show_error};
 
 /// Extract negative modes (starting with '-') from the rest of the arguments.
 ///

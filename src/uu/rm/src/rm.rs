@@ -5,7 +5,7 @@
 
 // spell-checker:ignore (path) eacces inacc
 
-use clap::{builder::ValueParser, crate_version, parser::ValueSource, Arg, ArgAction, Command};
+use clap::{parser::ValueSource};
 use std::collections::VecDeque;
 use std::ffi::{OsStr, OsString};
 use std::fs::{self, File, Metadata};
@@ -14,7 +14,7 @@ use std::ops::BitOr;
 use std::path::{Path, PathBuf};
 use uucore::display::Quotable;
 use uucore::error::{UResult, USimpleError, UUsageError};
-use uucore::{format_usage, help_about, help_section, help_usage, prompt_yes, show_error};
+use uucore::{prompt_yes, show_error};
 use walkdir::{DirEntry, WalkDir};
 
 #[derive(Eq, PartialEq, Clone, Copy)]

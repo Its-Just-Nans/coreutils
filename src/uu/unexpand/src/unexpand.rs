@@ -5,7 +5,6 @@
 
 // spell-checker:ignore (ToDO) nums aflag uflag scol prevtab amode ctype cwidth nbytes lastcol pctype Preprocess
 
-use clap::{crate_version, Arg, ArgAction, Command};
 use std::error::Error;
 use std::fmt;
 use std::fs::File;
@@ -16,7 +15,7 @@ use std::str::from_utf8;
 use unicode_width::UnicodeWidthChar;
 use uucore::display::Quotable;
 use uucore::error::{FromIo, UError, UResult, USimpleError};
-use uucore::{crash_if_err, format_usage, help_about, help_usage, show};
+use uucore::{crash_if_err, show};
 
 const DEFAULT_TABSTOP: usize = 8;
 
@@ -370,7 +369,7 @@ fn unexpand(options: &Options) -> UResult<()> {
 
 #[cfg(test)]
 mod tests {
-    use crate::is_digit_or_comma;
+    use crate::unexpand::is_digit_or_comma;
 
     #[test]
     fn test_is_digit_or_comma() {

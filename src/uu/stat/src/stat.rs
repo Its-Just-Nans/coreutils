@@ -5,18 +5,17 @@
 
 // spell-checker:ignore datetime
 
-use clap::builder::ValueParser;
 use uucore::display::Quotable;
 use uucore::error::{FromIo, UResult, USimpleError};
 use uucore::fs::display_permissions;
 use uucore::fsext::{pretty_filetype, pretty_fstype, read_fs_list, statfs, BirthTime, FsMeta};
 use uucore::libc::mode_t;
 use uucore::{
-    entries, format_usage, help_about, help_section, help_usage, show_error, show_warning,
+    entries, show_error, show_warning,
 };
 
 use chrono::{DateTime, Local};
-use clap::{crate_version, Arg, ArgAction, ArgMatches, Command};
+use clap::{ArgMatches};
 use std::borrow::Cow;
 use std::ffi::{OsStr, OsString};
 use std::fs;

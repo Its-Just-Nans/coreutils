@@ -3,12 +3,11 @@
 // For the full copyright and license information, please view the LICENSE
 // file that was distributed with this source code.
 
-use clap::{crate_version, Arg, ArgAction, Command};
 use std::fs::File;
 use std::io::{stdin, BufRead, BufReader, Read};
 use std::path::Path;
 use uucore::error::{set_exit_code, FromIo, UResult, USimpleError};
-use uucore::{format_usage, help_about, help_section, help_usage, show_error};
+use uucore::{show_error};
 
 // Settings store options used by nl to produce its output.
 pub struct Settings {

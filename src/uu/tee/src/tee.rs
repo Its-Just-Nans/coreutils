@@ -3,14 +3,12 @@
 // For the full copyright and license information, please view the LICENSE
 // file that was distributed with this source code.
 
-use clap::{builder::PossibleValue, crate_version, Arg, ArgAction, Command};
 use std::fs::OpenOptions;
 use std::io::{copy, stdin, stdout, Error, ErrorKind, Read, Result, Write};
 use std::path::PathBuf;
 use uucore::display::Quotable;
 use uucore::error::UResult;
-use uucore::shortcut_value_parser::ShortcutValueParser;
-use uucore::{format_usage, help_about, help_section, help_usage, show_error};
+use uucore::{show_error};
 
 // spell-checker:ignore nopipe
 

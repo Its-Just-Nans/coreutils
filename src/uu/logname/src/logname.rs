@@ -5,9 +5,8 @@
 
 // spell-checker:ignore (ToDO) getlogin userlogin
 
-use clap::{crate_version, Command};
 use std::ffi::CStr;
-use uucore::{error::UResult, format_usage, help_about, help_usage, show_error};
+use uucore::{error::UResult, show_error};
 
 extern "C" {
     // POSIX requires using getlogin (or equivalent code)

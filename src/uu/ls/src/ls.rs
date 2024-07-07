@@ -5,10 +5,6 @@
 
 // spell-checker:ignore (ToDO) somegroup nlink tabsize dired subdired dtype colorterm stringly
 
-use clap::{
-    builder::{NonEmptyStringValueParser, PossibleValue, ValueParser},
-    crate_version, Arg, ArgAction, Command,
-};
 use glob::{MatchOptions, Pattern};
 use lscolors::LsColors;
 
@@ -63,7 +59,7 @@ use uucore::{
     parse_size::parse_size_u64,
     version_cmp::version_cmp,
 };
-use uucore::{help_about, help_section, help_usage, parse_glob, show, show_error, show_warning};
+use uucore::{parse_glob, show, show_error, show_warning};
 
 use crate::colors::{color_name, StyleManager};
 use crate::dired::{is_dired_arg_present, DiredOutput};

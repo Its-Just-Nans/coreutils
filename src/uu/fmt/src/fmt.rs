@@ -5,7 +5,7 @@
 
 // spell-checker:ignore (ToDO) PSKIP linebreak ostream parasplit tabwidth xanti xprefix
 
-use clap::{crate_version, Arg, ArgAction, ArgMatches, Command};
+use clap::{ArgMatches};
 use std::fs::File;
 use std::io::{stdin, stdout, BufReader, BufWriter, Read, Stdout, Write};
 use uucore::display::Quotable;

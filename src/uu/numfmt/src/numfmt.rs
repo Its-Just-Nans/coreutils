@@ -9,7 +9,7 @@ use crate::options_pgrm::{
     FormatOptions, InvalidModes, NumfmtOptions, RoundMethod, TransformOptions,
 };
 use crate::units::{Result, Unit};
-use clap::{crate_version, parser::ValueSource, Arg, ArgAction, ArgMatches, Command};
+use clap::{parser::ValueSource, ArgMatches};
 use std::io::{BufRead, Write};
 use std::str::FromStr;
 
@@ -17,8 +17,7 @@ use crate::units::{IEC_BASES, SI_BASES};
 use uucore::display::Quotable;
 use uucore::error::UResult;
 use uucore::ranges::Range;
-use uucore::shortcut_value_parser::ShortcutValueParser;
-use uucore::{format_usage, help_about, help_section, help_usage, show, show_error};
+use uucore::{show, show_error};
 
 fn handle_args<'a>(args: impl Iterator<Item = &'a str>, options: &NumfmtOptions) -> UResult<()> {
     for l in args {

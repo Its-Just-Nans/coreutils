@@ -5,7 +5,6 @@
 
 // spell-checker:ignore (ToDO) delim
 
-use clap::{crate_version, Arg, ArgAction, Command};
 use std::fs::File;
 use std::io::{stdin, stdout, BufRead, BufReader, Read, Write};
 use std::path::Path;

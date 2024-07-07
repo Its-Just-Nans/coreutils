@@ -7,7 +7,7 @@
 
 use crate::filenames::{FilenameIterator, Suffix, SuffixError};
 use crate::strategy::{NumberType, Strategy, StrategyError};
-use clap::{crate_version, parser::ValueSource, Arg, ArgAction, ArgMatches, Command, ValueHint};
+use clap::{parser::ValueSource, ArgMatches};
 use std::ffi::OsString;
 use std::fmt;
 use std::fs::{metadata, File};

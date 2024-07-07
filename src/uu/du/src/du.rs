@@ -4,7 +4,7 @@
 // file that was distributed with this source code.
 
 use chrono::{DateTime, Local};
-use clap::{builder::PossibleValue, crate_version, Arg, ArgAction, ArgMatches, Command};
+use clap::{ArgMatches};
 use glob::Pattern;
 use std::collections::HashSet;
 use std::env;
@@ -30,8 +30,7 @@ use uucore::error::{set_exit_code, FromIo, UError, UResult, USimpleError};
 use uucore::line_ending::LineEnding;
 use uucore::parse_glob;
 use uucore::parse_size::{parse_size_u64, ParseSizeError};
-use uucore::shortcut_value_parser::ShortcutValueParser;
-use uucore::{format_usage, help_about, help_section, help_usage, show, show_error, show_warning};
+use uucore::{show, show_error, show_warning};
 #[cfg(windows)]
 use windows_sys::Win32::Foundation::HANDLE;
 #[cfg(windows)]

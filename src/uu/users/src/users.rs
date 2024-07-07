@@ -8,18 +8,12 @@
 use std::ffi::OsString;
 use std::path::Path;
 
-use clap::builder::ValueParser;
-use clap::{crate_version, Arg, Command};
 use uucore::error::UResult;
-use uucore::{format_usage, help_about, help_usage};
 
 #[cfg(target_os = "openbsd")]
 use utmp_classic::{parse_from_path, UtmpEntry};
 #[cfg(not(target_os = "openbsd"))]
 use uucore::utmpx::{self, Utmpx};
-
-const ABOUT: &str = help_about!("users.md");
-const USAGE: &str = help_usage!("users.md");
 
 #[cfg(target_os = "openbsd")]
 const OPENBSD_UTMP_FILE: &str = "/var/run/utmp";

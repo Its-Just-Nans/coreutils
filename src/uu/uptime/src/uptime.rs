@@ -21,9 +21,7 @@ use uucore::libc::time_t;
 
 use uucore::error::{UResult, USimpleError};
 
-use clap::{builder::ValueParser, crate_version, Arg, ArgAction, Command, ValueHint};
 
-use uucore::{format_usage, help_about, help_usage};
 
 #[cfg(target_os = "openbsd")]
 use utmp_classic::{parse_from_path, UtmpEntry};

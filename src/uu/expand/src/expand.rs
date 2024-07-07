@@ -5,7 +5,7 @@
 
 // spell-checker:ignore (ToDO) ctype cwidth iflag nbytes nspaces nums tspaces uflag Preprocess
 
-use clap::{crate_version, Arg, ArgAction, ArgMatches, Command};
+use clap::ArgMatches;
 use std::error::Error;
 use std::ffi::OsString;
 use std::fmt;
@@ -17,7 +17,7 @@ use std::str::from_utf8;
 use unicode_width::UnicodeWidthChar;
 use uucore::display::Quotable;
 use uucore::error::{set_exit_code, FromIo, UError, UResult};
-use uucore::{format_usage, help_about, help_usage, show_error};
+use uucore::show_error;
 
 static DEFAULT_TABSTOP: usize = 8;
 
@@ -441,7 +441,7 @@ fn expand(options: &Options) -> UResult<()> {
 
 #[cfg(test)]
 mod tests {
-    use crate::is_digit_or_comma;
+    use crate::expand::is_digit_or_comma;
 
     use super::next_tabstop;
     use super::RemainingMode;
