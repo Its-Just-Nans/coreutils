@@ -5,7 +5,7 @@
 
 // spell-checker:ignore (path) eacces inacc
 
-use clap::{parser::ValueSource};
+use clap::parser::ValueSource;
 use std::collections::VecDeque;
 use std::ffi::{OsStr, OsString};
 use std::fs::{self, File, Metadata};

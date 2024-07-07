@@ -10,8 +10,8 @@ use nix::unistd::Pid;
 use std::io::Error;
 use uucore::display::Quotable;
 use uucore::error::{FromIo, UResult, USimpleError};
+use uucore::show;
 use uucore::signals::{signal_by_name_or_value, signal_name_by_value, ALL_SIGNALS};
-use uucore::{show};
 
 #[derive(Clone, Copy)]
 pub enum Mode {

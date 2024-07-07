@@ -4,7 +4,7 @@
 // file that was distributed with this source code.
 
 use chrono::{DateTime, Local};
-use clap::{ArgMatches};
+use clap::ArgMatches;
 use glob::Pattern;
 use std::collections::HashSet;
 use std::env;

@@ -10,7 +10,6 @@ const ABOUT: &str = help_about!("mktemp.md");
 const USAGE: &str = help_usage!("mktemp.md");
 
 pub mod options {
-    pub static DEFAULT_TEMPLATE: &str = "tmp.XXXXXXXXXX";
     pub static OPT_DIRECTORY: &str = "directory";
     pub static OPT_DRY_RUN: &str = "dry-run";
     pub static OPT_QUIET: &str = "quiet";

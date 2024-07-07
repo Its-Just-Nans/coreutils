@@ -15,10 +15,10 @@ use std::io::{stdin, stdout, BufRead, BufReader, BufWriter, Split, Stdin, Write}
 use std::num::IntErrorKind;
 #[cfg(unix)]
 use std::os::unix::ffi::OsStrExt;
+use uucore::crash_if_err;
 use uucore::display::Quotable;
 use uucore::error::{set_exit_code, FromIo, UError, UResult, USimpleError};
 use uucore::line_ending::LineEnding;
-use uucore::{crash_if_err};
 
 #[derive(Debug)]
 enum JoinError {

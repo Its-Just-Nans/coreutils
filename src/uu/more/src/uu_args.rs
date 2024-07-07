@@ -9,11 +9,12 @@ use uucore::{format_usage, help_about, help_usage};
 
 const ABOUT: &str = help_about!("more.md");
 const USAGE: &str = help_usage!("more.md");
-pub const BELL: &str = "\x07";
 
 pub mod options {
     pub const SILENT: &str = "silent";
+    #[allow(dead_code)] //TODO: Implement this option
     pub const LOGICAL: &str = "logical";
+    #[allow(dead_code)] //TODO: Implement this option
     pub const NO_PAUSE: &str = "no-pause";
     pub const PRINT_OVER: &str = "print-over";
     pub const CLEAN_PRINT: &str = "clean-print";

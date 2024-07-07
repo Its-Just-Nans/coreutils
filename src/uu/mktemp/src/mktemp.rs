@@ -29,6 +29,8 @@ const TMPDIR_ENV_VAR: &str = "TMPDIR";
 #[cfg(windows)]
 const TMPDIR_ENV_VAR: &str = "TMP";
 
+pub static DEFAULT_TEMPLATE: &str = "tmp.XXXXXXXXXX";
+
 #[derive(Debug)]
 enum MkTempError {
     PersistError(PathBuf),
@@ -135,7 +137,7 @@ impl Options {
             // If no template argument is given, `--tmpdir` is implied.
             None => {
                 let tmpdir = Some(tmpdir.unwrap_or_else(env::temp_dir));
-                let template = crate::options::DEFAULT_TEMPLATE;
+                let template = DEFAULT_TEMPLATE;
                 (tmpdir, template.to_string())
             }
             Some(template) => {

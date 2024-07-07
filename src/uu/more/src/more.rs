@@ -28,6 +28,8 @@ use uucore::{display::Quotable, show};
 
 const MULTI_FILE_TOP_PROMPT: &str = "\r::::::::::::::\n\r{}\n\r::::::::::::::\n";
 
+const BELL: &str = "\x07";
+
 struct Options {
     clean_print: bool,
     from_line: usize,
@@ -467,7 +469,6 @@ impl<'a> Pager<'a> {
                 (lower_mark as f64 / self.line_count as f64 * 100.0).round() as u16
             )
         };
-        use crate::uu_args::BELL;
         let status = format!("--More--({status_inner})");
         let banner = match (self.silent, wrong_key) {
             (true, Some(key)) => format!(

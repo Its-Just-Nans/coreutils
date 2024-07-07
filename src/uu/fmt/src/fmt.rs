@@ -5,7 +5,7 @@
 
 // spell-checker:ignore (ToDO) PSKIP linebreak ostream parasplit tabwidth xanti xprefix
 
-use clap::{ArgMatches};
+use clap::ArgMatches;
 use std::fs::File;
 use std::io::{stdin, stdout, BufReader, BufWriter, Read, Stdout, Write};
 use uucore::display::Quotable;
@@ -303,8 +303,8 @@ pub fn uumain(args: impl uucore::Args) -> UResult<()> {
 
 #[cfg(test)]
 mod tests {
+    use crate::fmt::{extract_files, extract_width};
     use crate::uu_app;
-    use crate::{extract_files, extract_width};
 
     #[test]
     fn parse_negative_width() {

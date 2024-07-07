@@ -10,12 +10,10 @@ use uucore::error::{FromIo, UResult, USimpleError};
 use uucore::fs::display_permissions;
 use uucore::fsext::{pretty_filetype, pretty_fstype, read_fs_list, statfs, BirthTime, FsMeta};
 use uucore::libc::mode_t;
-use uucore::{
-    entries, show_error, show_warning,
-};
+use uucore::{entries, show_error, show_warning};
 
 use chrono::{DateTime, Local};
-use clap::{ArgMatches};
+use clap::ArgMatches;
 use std::borrow::Cow;
 use std::ffi::{OsStr, OsString};
 use std::fs;

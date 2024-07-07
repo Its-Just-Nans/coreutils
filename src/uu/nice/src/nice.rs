@@ -11,7 +11,8 @@ use std::io::{Error, Write};
 use std::ptr;
 
 use uucore::{
-    error::{set_exit_code, UClapError, UResult, USimpleError, UUsageError}, show_error,
+    error::{set_exit_code, UClapError, UResult, USimpleError, UUsageError},
+    show_error,
 };
 
 fn is_prefix_of(maybe_prefix: &str, target: &str, min_match: usize) -> bool {

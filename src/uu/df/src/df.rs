@@ -14,7 +14,7 @@ use uucore::fsext::{read_fs_list, MountInfo};
 use uucore::parse_size::ParseSizeError;
 use uucore::show;
 
-use clap::{ArgMatches};
+use clap::ArgMatches;
 
 use std::error::Error;
 use std::ffi::OsString;

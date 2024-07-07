@@ -8,7 +8,7 @@ use std::io::{copy, stdin, stdout, Error, ErrorKind, Read, Result, Write};
 use std::path::PathBuf;
 use uucore::display::Quotable;
 use uucore::error::UResult;
-use uucore::{show_error};
+use uucore::show_error;
 
 // spell-checker:ignore nopipe
 

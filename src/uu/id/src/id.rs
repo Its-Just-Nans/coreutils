@@ -42,7 +42,7 @@ pub use uucore::libc;
 use uucore::libc::{getlogin, uid_t};
 use uucore::line_ending::LineEnding;
 use uucore::process::{getegid, geteuid, getgid, getuid};
-use uucore::{show_error};
+use uucore::show_error;
 
 macro_rules! cstr2cow {
     ($v:expr) => {
