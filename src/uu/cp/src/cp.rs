@@ -36,7 +36,7 @@ use uucore::fs::{
 use uucore::{backup_control, update_control};
 // These are exposed for projects (e.g. nushell) that want to create an `Options` value, which
 // requires these enum.
-pub use uucore::{backup_control::BackupMode, update_control::UpdateMode};
+use uucore::{backup_control::BackupMode, update_control::UpdateMode};
 use uucore::{prompt_yes, show_error, show_warning, util_name};
 
 use crate::copydir::copy_directory;

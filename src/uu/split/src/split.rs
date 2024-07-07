@@ -277,10 +277,13 @@ impl fmt::Display for SettingsError {
             }
             Self::InvalidIOBlockSize(s) => write!(f, "invalid IO block size: {}", s.quote()),
             #[cfg(windows)]
-            Self::NotSupported => write!(
-                f,
-                "{crate::options::OPT_FILTER} is currently not supported in this platform"
-            ),
+            Self::NotSupported => {
+                use crate::options::OPT_FILTER;
+                write!(
+                    f,
+                    "{OPT_FILTER} is currently not supported in this platform"
+                )
+            }
         }
     }
 }

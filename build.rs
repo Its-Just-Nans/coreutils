@@ -21,6 +21,21 @@ macro_rules! collect_functions {
         $(
             map.insert(stringify!($module), $module::uu_app);
         )*
+        map.insert("md5sum", uu_hashsum::uu_app_common);
+        map.insert("sha1sum", uu_hashsum::uu_app_common);
+        map.insert("sha224sum", uu_hashsum::uu_app_common);
+        map.insert("sha256sum", uu_hashsum::uu_app_common);
+        map.insert("sha384sum", uu_hashsum::uu_app_common);
+        map.insert("sha512sum", uu_hashsum::uu_app_common);
+        map.insert("sha3sum", uu_hashsum::uu_app_bits);
+        map.insert("sha3-224sum", uu_hashsum::uu_app_common);
+        map.insert("sha3-256sum", uu_hashsum::uu_app_common);
+        map.insert("sha3-384sum", uu_hashsum::uu_app_common);
+        map.insert("sha3-512sum", uu_hashsum::uu_app_common);
+        map.insert("shake128sum", uu_hashsum::uu_app_bits);
+        map.insert("shake256sum", uu_hashsum::uu_app_bits);
+        map.insert("b2sum", uu_hashsum::uu_app_common);
+        map.insert("b3sum", uu_hashsum::uu_app_b3sum);
         map
     }};
 }
@@ -62,7 +77,7 @@ pub fn generate_manpages(_crates: &[String]) -> Result<(), std::io::Error> {
         uu_fmt,
         uu_fold,
         uu_groups,
-        // uu_hashsum, //TODO: Add manpage for hashsum
+        // uu_hashsum, // Done in macro
         uu_head,
         uu_hostid,
         uu_hostname,

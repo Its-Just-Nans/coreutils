@@ -22,6 +22,8 @@ use uucore::checksum::HashAlgorithm;
 use uucore::error::{FromIo, UResult};
 use uucore::sum::{Digest, Sha3_224, Sha3_256, Sha3_384, Sha3_512, Shake128, Shake256};
 
+pub const NAME: &str = "hashsum";
+
 struct Options {
     algoname: &'static str,
     digest: Box<dyn Digest + 'static>,
@@ -148,10 +150,10 @@ fn create_algorithm_from_flags(matches: &ArgMatches) -> UResult<HashAlgorithm> {
 #[uucore::main]
 pub fn uumain(mut args: impl uucore::Args) -> UResult<()> {
     // if there is no program name for some reason, default to "hashsum"
-    let program = args.next().unwrap_or_else(|| OsString::from(crate::NAME));
+    let program = args.next().unwrap_or_else(|| OsString::from(NAME));
     let binary_name = Path::new(&program)
         .file_stem()
-        .unwrap_or_else(|| OsStr::new(crate::NAME))
+        .unwrap_or_else(|| OsStr::new(NAME))
         .to_string_lossy();
 
     let args = iter::once(program.clone()).chain(args);

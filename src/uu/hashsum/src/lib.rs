@@ -11,6 +11,5 @@ pub use uu_args::uu_app_b3sum;
 pub use uu_args::uu_app_bits;
 pub use uu_args::uu_app_common;
 pub use uu_args::uu_app_custom;
-pub use uu_args::NAME;
 
 pub use hashsum::uumain;

@@ -126,9 +126,9 @@ mod uu_groups {
     include!("./uu/groups/src/uu_args.rs");
 }
 
-// mod uu_hashsum {
-//     include!("./uu/hashsum/src/uu_args.rs");
-// }
+mod uu_hashsum {
+    include!("./uu/hashsum/src/uu_args.rs");
+}
 
 mod uu_head {
     include!("./uu/head/src/uu_args.rs");

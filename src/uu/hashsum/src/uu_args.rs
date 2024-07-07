@@ -9,7 +9,6 @@ use clap::{builder::ValueParser, crate_version, value_parser, Arg, ArgAction, Co
 
 use uucore::{format_usage, help_about, help_usage};
 
-pub const NAME: &str = "hashsum";
 const ABOUT: &str = help_about!("hashsum.md");
 const USAGE: &str = help_usage!("hashsum.md");
 
@@ -217,6 +216,8 @@ pub fn uu_app_custom() -> Command {
 
 // hashsum is handled differently in build.rs, therefore this is not the same
 // as in other utilities.
+// Second return value is is_hashsum_bin
+#[allow(dead_code)]
 pub fn uu_app(binary_name: &str) -> (Command, bool) {
     match binary_name {
         // These all support the same options.
