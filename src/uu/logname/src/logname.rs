@@ -25,12 +25,9 @@ fn get_userlogin() -> Option<String> {
     }
 }
 
-const ABOUT: &str = help_about!("logname.md");
-const USAGE: &str = help_usage!("logname.md");
-
 #[uucore::main]
 pub fn uumain(args: impl uucore::Args) -> UResult<()> {
-    let _ = uu_app().try_get_matches_from(args)?;
+    let _ = crate::uu_app().try_get_matches_from(args)?;
 
     match get_userlogin() {
         Some(userlogin) => println!("{userlogin}"),
@@ -38,12 +35,4 @@ pub fn uumain(args: impl uucore::Args) -> UResult<()> {
     }
 
     Ok(())
-}
-
-pub fn uu_app() -> Command {
-    Command::new(uucore::util_name())
-        .version(crate_version!())
-        .override_usage(format_usage(USAGE))
-        .about(ABOUT)
-        .infer_long_args(true)
 }

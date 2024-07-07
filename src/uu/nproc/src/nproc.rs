@@ -20,17 +20,11 @@ pub const _SC_NPROCESSORS_CONF: libc::c_int = 57;
 #[cfg(target_os = "netbsd")]
 pub const _SC_NPROCESSORS_CONF: libc::c_int = 1001;
 
-static OPT_ALL: &str = "all";
-static OPT_IGNORE: &str = "ignore";
-
-const ABOUT: &str = help_about!("nproc.md");
-const USAGE: &str = help_usage!("nproc.md");
-
 #[uucore::main]
 pub fn uumain(args: impl uucore::Args) -> UResult<()> {
-    let matches = uu_app().try_get_matches_from(args)?;
+    let matches = crate::uu_app().try_get_matches_from(args)?;
 
-    let ignore = match matches.get_one::<String>(OPT_IGNORE) {
+    let ignore = match matches.get_one::<String>(crate::options::OPT_IGNORE) {
         Some(numstr) => match numstr.trim().parse() {
             Ok(num) => num,
             Err(e) => {
@@ -56,7 +50,7 @@ pub fn uumain(args: impl uucore::Args) -> UResult<()> {
         Err(_) => usize::MAX,
     };
 
-    let mut cores = if matches.get_flag(OPT_ALL) {
+    let mut cores = if matches.get_flag(crate::options::OPT_ALL) {
         num_cpus_all()
     } else {
         // OMP_NUM_THREADS doesn't have an impact on --all
@@ -90,26 +84,6 @@ pub fn uumain(args: impl uucore::Args) -> UResult<()> {
     }
     println!("{cores}");
     Ok(())
-}
-
-pub fn uu_app() -> Command {
-    Command::new(uucore::util_name())
-        .version(crate_version!())
-        .about(ABOUT)
-        .override_usage(format_usage(USAGE))
-        .infer_long_args(true)
-        .arg(
-            Arg::new(OPT_ALL)
-                .long(OPT_ALL)
-                .help("print the number of cores available to the system")
-                .action(ArgAction::SetTrue),
-        )
-        .arg(
-            Arg::new(OPT_IGNORE)
-                .long(OPT_IGNORE)
-                .value_name("N")
-                .help("ignore up to N cores"),
-        )
 }
 
 #[cfg(any(

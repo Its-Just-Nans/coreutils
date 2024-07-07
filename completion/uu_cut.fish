@@ -1,12 +1,11 @@
-complete -c uu_cut -s A -l show-all -d 'equivalent to -vET'
-complete -c uu_cut -s b -l number-nonblank -d 'number nonempty output lines, overrides -n'
-complete -c uu_cut -s e -d 'equivalent to -vE'
-complete -c uu_cut -s E -l show-ends -d 'display $ at end of each line'
-complete -c uu_cut -s n -l number -d 'number all output lines'
-complete -c uu_cut -s s -l squeeze-blank -d 'suppress repeated empty output lines'
-complete -c uu_cut -s t -d 'equivalent to -vT'
-complete -c uu_cut -s T -l show-tabs -d 'display TAB characters at ^I'
-complete -c uu_cut -s v -l show-nonprinting -d 'use ^ and M- notation, except for LF (\\n) and TAB (\\t)'
-complete -c uu_cut -s u -d '(ignored)'
+complete -c uu_cut -s b -l bytes -d 'filter byte columns from the input source' -r
+complete -c uu_cut -s c -l characters -d 'alias for character mode' -r
+complete -c uu_cut -s d -l delimiter -d 'specify the delimiter character that separates fields in the input source. Defaults to Tab.' -r
+complete -c uu_cut -s f -l fields -d 'filter field columns from the input source' -r
+complete -c uu_cut -l output-delimiter -d 'in field mode, replace the delimiter in output lines with this option\'s argument' -r
+complete -c uu_cut -s w -d 'Use any number of whitespace (Space, Tab) to separate fields in the input source (FreeBSD extension).'
+complete -c uu_cut -l complement -d 'invert the filter - instead of displaying only the filtered columns, display all but those columns'
+complete -c uu_cut -s s -l only-delimited -d 'in field mode, only print lines which contain the delimiter'
+complete -c uu_cut -s z -l zero-terminated -d 'instead of filtering columns based on line, filter columns based on \\0 (NULL character)'
 complete -c uu_cut -s h -l help -d 'Print help'
 complete -c uu_cut -s V -l version -d 'Print version'

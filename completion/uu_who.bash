@@ -19,7 +19,7 @@ _uu_who() {
 
     case "${cmd}" in
         uu_who)
-            opts="-h -V --help --version"
+            opts="-a -b -d -H -l -m -p -q -r -s -t -u -w -T -h -V --all --boot --dead --heading --login --lookup --process --count --runlevel --short --time --users --message --writable --mesg --help --version [FILE]..."
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0

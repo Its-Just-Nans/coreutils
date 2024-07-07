@@ -24,8 +24,6 @@ const USAGE: &str = help_usage!("users.md");
 #[cfg(target_os = "openbsd")]
 const OPENBSD_UTMP_FILE: &str = "/var/run/utmp";
 
-static ARG_FILES: &str = "files";
-
 fn get_long_usage() -> String {
     #[cfg(not(target_os = "openbsd"))]
     let default_path: &str = utmpx::DEFAULT_FILE;
@@ -40,12 +38,12 @@ If FILE is not specified, use {}.  /var/log/wtmp as FILE is common.",
 
 #[uucore::main]
 pub fn uumain(args: impl uucore::Args) -> UResult<()> {
-    let matches = uu_app()
+    let matches = crate::uu_app()
         .after_help(get_long_usage())
         .try_get_matches_from(args)?;
 
     let files: Vec<&Path> = matches
-        .get_many::<OsString>(ARG_FILES)
+        .get_many::<OsString>(crate::options::ARG_FILES)
         .map(|v| v.map(AsRef::as_ref).collect())
         .unwrap_or_default();
 
@@ -95,18 +93,4 @@ pub fn uumain(args: impl uucore::Args) -> UResult<()> {
     }
 
     Ok(())
-}
-
-pub fn uu_app() -> Command {
-    Command::new(uucore::util_name())
-        .version(crate_version!())
-        .about(ABOUT)
-        .override_usage(format_usage(USAGE))
-        .infer_long_args(true)
-        .arg(
-            Arg::new(ARG_FILES)
-                .num_args(1)
-                .value_hint(clap::ValueHint::FilePath)
-                .value_parser(ValueParser::os_string()),
-        )
 }

@@ -15,23 +15,21 @@ _uu_cut() {
 
     local context curcontext="$curcontext" state line
     _arguments "${_arguments_options[@]}" \
-'-A[equivalent to -vET]' \
-'--show-all[equivalent to -vET]' \
-'-b[number nonempty output lines, overrides -n]' \
-'--number-nonblank[number nonempty output lines, overrides -n]' \
-'-e[equivalent to -vE]' \
-'-E[display \$ at end of each line]' \
-'--show-ends[display \$ at end of each line]' \
-'-n[number all output lines]' \
-'--number[number all output lines]' \
-'-s[suppress repeated empty output lines]' \
-'--squeeze-blank[suppress repeated empty output lines]' \
-'-t[equivalent to -vT]' \
-'-T[display TAB characters at ^I]' \
-'--show-tabs[display TAB characters at ^I]' \
-'-v[use ^ and M- notation, except for LF (\\n) and TAB (\\t)]' \
-'--show-nonprinting[use ^ and M- notation, except for LF (\\n) and TAB (\\t)]' \
-'-u[(ignored)]' \
+'*-b+[filter byte columns from the input source]:LIST: ' \
+'*--bytes=[filter byte columns from the input source]:LIST: ' \
+'*-c+[alias for character mode]:LIST: ' \
+'*--characters=[alias for character mode]:LIST: ' \
+'-d+[specify the delimiter character that separates fields in the input source. Defaults to Tab.]:DELIM: ' \
+'--delimiter=[specify the delimiter character that separates fields in the input source. Defaults to Tab.]:DELIM: ' \
+'*-f+[filter field columns from the input source]:LIST: ' \
+'*--fields=[filter field columns from the input source]:LIST: ' \
+'--output-delimiter=[in field mode, replace the delimiter in output lines with this option'\''s argument]:NEW_DELIM: ' \
+'-w[Use any number of whitespace (Space, Tab) to separate fields in the input source (FreeBSD extension).]' \
+'--complement[invert the filter - instead of displaying only the filtered columns, display all but those columns]' \
+'-s[in field mode, only print lines which contain the delimiter]' \
+'--only-delimited[in field mode, only print lines which contain the delimiter]' \
+'-z[instead of filtering columns based on line, filter columns based on \\0 (NULL character)]' \
+'--zero-terminated[instead of filtering columns based on line, filter columns based on \\0 (NULL character)]' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \

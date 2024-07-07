@@ -19,17 +19,9 @@ extern "C" {
 
 #[uucore::main]
 pub fn uumain(args: impl uucore::Args) -> UResult<()> {
-    uu_app().try_get_matches_from(args)?;
+    crate::uu_app().try_get_matches_from(args)?;
     hostid();
     Ok(())
-}
-
-pub fn uu_app() -> Command {
-    Command::new(uucore::util_name())
-        .version(crate_version!())
-        .about(ABOUT)
-        .override_usage(format_usage(USAGE))
-        .infer_long_args(true)
 }
 
 fn hostid() {

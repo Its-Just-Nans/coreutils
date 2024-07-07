@@ -5,7 +5,7 @@
 // spell-checker:ignore powf
 use uucore::display::Quotable;
 
-use crate::options::{NumfmtOptions, RoundMethod, TransformOptions};
+use crate::options_pgrm::{NumfmtOptions, RoundMethod, TransformOptions};
 use crate::units::{DisplayableSuffix, RawSuffix, Result, Suffix, Unit, IEC_BASES, SI_BASES};
 
 /// Iterate over a line's fields, where each field is a contiguous sequence of

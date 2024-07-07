@@ -16,6 +16,25 @@ static RUNLEVEL_HELP: &str = "print current runlevel";
 #[cfg(not(target_os = "linux"))]
 static RUNLEVEL_HELP: &str = "print current runlevel (This is meaningless on non Linux)";
 
+pub mod options {
+    pub const ALL: &str = "all";
+    pub const BOOT: &str = "boot";
+    pub const DEAD: &str = "dead";
+    pub const HEADING: &str = "heading";
+    pub const LOGIN: &str = "login";
+    pub const LOOKUP: &str = "lookup";
+    pub const ONLY_HOSTNAME_USER: &str = "only_hostname_user";
+    pub const PROCESS: &str = "process";
+    pub const COUNT: &str = "count";
+    pub const RUNLEVEL: &str = "runlevel";
+    pub const SHORT: &str = "short";
+    pub const TIME: &str = "time";
+    pub const USERS: &str = "users";
+    pub const MESG: &str = "mesg"; // aliases: --message, --writable
+    pub const FILE: &str = "FILE"; // if length=1: FILE, if length=2: ARG1 ARG2
+}
+
+#[allow(clippy::too_many_lines)]
 pub fn uu_app() -> Command {
     Command::new(uucore::util_name())
         .version(crate_version!())
@@ -23,97 +42,97 @@ pub fn uu_app() -> Command {
         .override_usage(format_usage(USAGE))
         .infer_long_args(true)
         .arg(
-            Arg::new(crate::options::ALL)
-                .long(crate::options::ALL)
+            Arg::new(options::ALL)
+                .long(options::ALL)
                 .short('a')
                 .help("same as -b -d --login -p -r -t -T -u")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::BOOT)
-                .long(crate::options::BOOT)
+            Arg::new(options::BOOT)
+                .long(options::BOOT)
                 .short('b')
                 .help("time of last system boot")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::DEAD)
-                .long(crate::options::DEAD)
+            Arg::new(options::DEAD)
+                .long(options::DEAD)
                 .short('d')
                 .help("print dead processes")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::HEADING)
-                .long(crate::options::HEADING)
+            Arg::new(options::HEADING)
+                .long(options::HEADING)
                 .short('H')
                 .help("print line of column headings")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::LOGIN)
-                .long(crate::options::LOGIN)
+            Arg::new(options::LOGIN)
+                .long(options::LOGIN)
                 .short('l')
                 .help("print system login processes")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::LOOKUP)
-                .long(crate::options::LOOKUP)
+            Arg::new(options::LOOKUP)
+                .long(options::LOOKUP)
                 .help("attempt to canonicalize hostnames via DNS")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::ONLY_HOSTNAME_USER)
+            Arg::new(options::ONLY_HOSTNAME_USER)
                 .short('m')
                 .help("only hostname and user associated with stdin")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::PROCESS)
-                .long(crate::options::PROCESS)
+            Arg::new(options::PROCESS)
+                .long(options::PROCESS)
                 .short('p')
                 .help("print active processes spawned by init")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::COUNT)
-                .long(crate::options::COUNT)
+            Arg::new(options::COUNT)
+                .long(options::COUNT)
                 .short('q')
                 .help("all login names and number of users logged on")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::RUNLEVEL)
-                .long(crate::options::RUNLEVEL)
+            Arg::new(options::RUNLEVEL)
+                .long(options::RUNLEVEL)
                 .short('r')
                 .help(RUNLEVEL_HELP)
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::SHORT)
-                .long(crate::options::SHORT)
+            Arg::new(options::SHORT)
+                .long(options::SHORT)
                 .short('s')
                 .help("print only name, line, and time (default)")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::TIME)
-                .long(crate::options::TIME)
+            Arg::new(options::TIME)
+                .long(options::TIME)
                 .short('t')
                 .help("print last system clock change")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::USERS)
-                .long(crate::options::USERS)
+            Arg::new(options::USERS)
+                .long(options::USERS)
                 .short('u')
                 .help("list users logged in")
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::MESG)
-                .long(crate::options::MESG)
+            Arg::new(options::MESG)
+                .long(options::MESG)
                 .short('T')
                 .visible_short_alias('w')
                 .visible_aliases(["message", "writable"])
@@ -121,7 +140,7 @@ pub fn uu_app() -> Command {
                 .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new(crate::options::FILE)
+            Arg::new(options::FILE)
                 .num_args(1..=2)
                 .value_hint(clap::ValueHint::FilePath),
         )

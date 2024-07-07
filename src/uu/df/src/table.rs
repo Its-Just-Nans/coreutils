@@ -9,10 +9,11 @@
 //! collection of data rows ([`Row`]), one per filesystem.
 use unicode_width::UnicodeWidthStr;
 
+use crate::blocks::BlockSize;
 use crate::blocks::{to_magnitude_and_suffix, SuffixType};
 use crate::columns::{Alignment, Column};
+use crate::df::Options;
 use crate::filesystem::Filesystem;
-use crate::{BlockSize, Options};
 use uucore::fsext::{FsUsage, MountInfo};
 
 use std::fmt;
