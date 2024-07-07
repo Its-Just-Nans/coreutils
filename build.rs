@@ -28,11 +28,11 @@ macro_rules! collect_functions {
 /// # Errors
 /// Returns an error if the manpage generation fails.
 pub fn generate_manpages(_crates: &[String]) -> Result<(), std::io::Error> {
-    let crates = collect_functions!(uu_arch, uu_cat, uu_wc, uu_who, uu_whoami, uu_yes);
-    println!("{:?}", crates);
+    let crates = collect_functions!(
+        uu_arch, uu_cat, uu_wc, uu_chown, uu_chroot, uu_dd, uu_who, uu_whoami, uu_yes
+    );
     let out_dir_completion = "completion";
     std::fs::create_dir_all(out_dir_completion)?;
-
     let out_dir_manpages = "man-page";
     std::fs::create_dir_all(out_dir_manpages)?;
 
