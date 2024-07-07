@@ -3,7 +3,7 @@
 // For the full copyright and license information, please view the LICENSE
 // file that was distributed with this source code.
 
-use std::io::{stdout, Read, Write};
+use std::io::Read;
 
 use crate::display::Quotable;
 #[cfg(feature = "encoding")]
@@ -153,6 +153,8 @@ pub fn handle_input<R: Read>(
     ignore_garbage: bool,
     decode: bool,
 ) -> UResult<()> {
+    use std::io::{stdout, Write}; //  stdout().write_all()
+
     let mut data = Data::new(input, format).ignore_garbage(ignore_garbage);
     if let Some(wrap) = line_wrap {
         data = data.line_wrap(wrap);
